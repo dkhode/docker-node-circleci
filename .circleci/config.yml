@@ -9,6 +9,7 @@ jobs:
       - run:
           name: build images and push
           command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t paflopes/node-circleci:8 -t paflopes/node-circleci:latest ./v8
             docker push paflopes/node-circleci:latest
             docker push paflopes/node-circleci:8
@@ -21,6 +22,7 @@ jobs:
       - run:
           name: build images and push
           command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t paflopes/node-circleci:7 ./v7
             docker push paflopes/node-circleci:7
   build_and_upload_v6:
@@ -32,6 +34,7 @@ jobs:
       - run:
           name: build images and push
           command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t paflopes/node-circleci:6 ./v6
             docker push paflopes/node-circleci:6
   build_and_upload_v4:
@@ -43,6 +46,7 @@ jobs:
       - run:
           name: build images and push
           command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t paflopes/node-circleci:4 ./v4
             docker push paflopes/node-circleci:4
 workflows:
