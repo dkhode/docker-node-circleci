@@ -1,0 +1,55 @@
+version: 2
+jobs:
+  build_and_upload_v8:
+    docker:
+      - image: circleci/node:6
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build images and push
+          command: |
+            docker build -t paflopes/node-circleci:8 -t paflopes/node-circleci:latest ./v8
+            docker push paflopes/node-circleci:latest
+            docker push paflopes/node-circleci:8
+  build_and_upload_v7:
+    docker:
+      - image: circleci/node:6
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build images and push
+          command: |
+            docker build -t paflopes/node-circleci:7 ./v7
+            docker push paflopes/node-circleci:7
+  build_and_upload_v6:
+    docker:
+      - image: circleci/node:6
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build images and push
+          command: |
+            docker build -t paflopes/node-circleci:6 ./v6
+            docker push paflopes/node-circleci:6
+  build_and_upload_v4:
+    docker:
+      - image: circleci/node:6
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build images and push
+          command: |
+            docker build -t paflopes/node-circleci:4 ./v4
+            docker push paflopes/node-circleci:4
+workflows:
+  version: 2
+  build_and_upload:
+    jobs:
+      - build_and_upload_v4
+      - build_and_upload_v6
+      - build_and_upload_v7
+      - build_and_upload_v8
